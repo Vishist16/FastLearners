@@ -1,0 +1,52 @@
+{% extends "base.html" %}{% block title %}Student DATA{% endblock %}
+{% block content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <link rel='stylesheet' type="text/css" href='{{ url_for("static", filename="bgst.css") }}'/>
+        <div class="container">
+            
+            <br />
+            <h3 align="center">Subject wise Fast Learners</h3><br />
+            <select name="search_filter" id="search_filter2" class="form-control">
+            <option value="">Select Option</option>';
+            {% for row in subject %}
+                <option value="{{row.sub}}">{{row.sub}}</option>';    
+            {% endfor %}
+            </select>
+            <input type="hidden" name="hidden_value" id="hidden_value2" />
+            <div style="clear:both"></div>
+            <br />
+            <div class="text-center">
+                <img src="https://media3.giphy.com/media/fYeUO8MJtFB8EKmkzf/giphy.gif?cid=ecf05e47skpu8caj8n5ptpw94bg3hp6kk4ysul3mpjqjmigh&rid=giphy.gif&ct=g" class="rounded" alt="...">
+              </div>
+
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Uid</th>
+                            <th>Name</th>
+                            <th>Class</th>
+                            <th>Dbms</th>
+                            <th>Java</th>
+                            <th>DSA</th>
+                            <th>Aptitude</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <br />
+            <br />
+            <br />
+        </div>
+        {% block javascript %}
+        
+        
+        <script 
+        type="text/javascript"
+        src="{{ url_for('static', filename='stu1.js') }}"></script>
+    {% endblock %}
+{% endblock %}

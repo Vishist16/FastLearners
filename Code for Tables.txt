@@ -1,0 +1,119 @@
+create database test1;
+
+use test1;
+
+create table user(
+username varchar(20),
+password varchar(20)
+);
+
+insert into user (username, password) values
+('21test123', 'airforce14');
+
+
+create table student(
+uid varchar(10) NOT NULL,
+name varchar(30),
+phone bigint(22),
+class varchar(10),
+Primary KEY (uid)
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;;
+
+create table marks(
+uid varchar(10) NOT NULL,
+DBMS int(4),
+JAVA int(4),
+DSA int(4),
+Aptitude int(4),
+Total int(6),
+foreign key (uid) references student(uid)
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+create table subjects(
+sub varchar(20)
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;;
+
+insert into subjects (sub) values
+('DBMS'),
+('DSA'),
+('JAVA'),
+('Aptitude');
+
+select distinct sub from subjects order by sub ASC;
+
+select distinct class from student order by class ASC;
+
+insert into student (uid, name, phone, class) values
+('21BCS123','Test Singh', 7737762222, '21BCS-715'),
+('21BCS125','Oberoi Harish', 7734561222, '21BCS-715'),
+('21BCS127','DS Ranjan', 7569162242, '21BCS-715'),
+('21BCS129','Dipanshu Sahu', 7778456117, '21BCS-715'),
+('21BCS131','Tejvinder Singh', 8537765645, '21BCS-715'),
+('21BCS133','Aditya Upadhyay', 7569162242, '21BCS-714'),
+('21BCS135','Shashwat Bhaskar', 7778456117, '21BCS-714'),
+('21BCS137','Dipankar Yadav', 8537765645, '21BCS-713');
+
+
+insert into marks (uid, dbms, java, dsa, aptitude, total) values
+('21BCS123',87, 92, 97, 86,362),
+('21BCS125',92, 85, 81, 77,335),
+('21BCS127',86, 75, 83, 93,337),
+('21BCS129',77, 76, 83, 81,317),
+('21BCS131',89, 91, 86, 83,349),
+('21BCS133',74, 85, 93, 87,339),
+('21BCS135',88, 87, 95, 79,349),
+('21BCS137',77, 76, 71, 82,306);
+
+select student.uid, student.name, student.class, marks.dbms, marks.java, marks.java, marks.aptitude, marks.total from marks inner join student on marks.uid=student.uid;
+
+
+select student.uid, student.name, student.class, marks.dbms, marks.java, marks.dsa, marks.aptitude, marks.total from marks inner join student on marks.uid=student.uid where class="21BCS-715" and dbms in (select max(dbms) from marks where class="21BCS-715");
+
+
+select student.uid, student.name, student.class, marks.dbms, marks.java, marks.dsa, marks.aptitude, marks.total from marks inner join student on marks.uid=student.uid where class in (%s)
+
+
+select student.uid, student.name, student.class, marks.dbms, marks.java, marks.dsa, marks.aptitude, marks.total from marks inner join student on marks.uid=student.uid where dbms in (select max(dbms) from marks where class=(%s));
+
+
+
+
+else:
+            search_text = request.form['query']
+            print(search_text)
+            cur.execute("select student.uid, student.name, student.class, marks.dbms, marks.java, marks.dsa, marks.aptitude, marks.total from marks inner join student on marks.uid=student.uid where class in (%s)", [search_text])
+            stulist = cur.fetchall()  
+    return jsonify({'htmlresponse': render_template('newres.html', stulist=stulist)})
+
+
+
+select student.uid, student.name, student.class, marks.dbms, marks.java, marks.dsa, marks.aptitude, marks.total from marks inner join student on marks.uid=student.uid where total in (select max(total) from marks where class in (%s))
+
+
+select student.uid, student.name, student.class, marks.dbms, marks.java, marks.dsa, marks.aptitude, marks.total from marks inner join student on marks.uid=student.uid where total in (select max(select max(total),class from marks group by class) from marks where class='21BCS-713');
+
+select student.class, max(marks.total) from marks inner join student on marks.uid=student.uid group by student.class;
+
+select student.uid, student.name, student.class, marks.dbms, marks.java, marks.dsa, marks.aptitude, marks.total from marks inner join student on marks.uid=student.uid where total=349;
+
+
+
+insert into student (uid, name, phone, class) values
+('21BCS139','Taranjeet Singh', 7737762222, '21BCS-714'),
+('21BCS141','Curious Harmeet', 7734561222, '21BCS-713'),
+('21BCS143','Sajal Kumar', 7569162242, '21BCS-714'),
+('21BCS146','Sarath Kumar', 7778456117, '21BCS-713'),
+('21BCS149','Naveen Sethi', 8537765645, '21BCS-714'),
+('21BCS151','Aditya Shimpi', 7569162242, '21BCS-713'),
+('21BCS153','Shashwat Kohli', 7778456117, '21BCS-714'),
+('21BCS155','Dravid Krishnan', 8537765645, '21BCS-715');
+
+insert into marks (uid, dbms, java, dsa, aptitude, total) values
+('21BCS139',87, 77, 76, 56,308),
+('21BCS141',91, 85, 81, 77,336),
+('21BCS143',86, 75, 83, 91,338),
+('21BCS146',77, 76, 83, 81,315),
+('21BCS149',89, 91, 86, 83,336),
+('21BCS151',74, 85, 93, 87,341),
+('21BCS153',88, 87, 95, 79,347),
+('21BCS155',77, 76, 71, 82,302);

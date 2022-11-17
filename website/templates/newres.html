@@ -1,0 +1,13 @@
+//templates/response.html
+{% for row in stulist %}  
+<tr>
+    <td>{{row.uid}}</td>
+    <td>{{row.name}}</td>
+    <td>{{row.class}}</td>
+    <td>{{ row.dbms }}</td>
+    <td>{{row.java}}</td>
+    <td>{{row.dsa}}</td>
+    <td>{{ row.aptitude }}</td>
+    <td>{{row.total}}</td>
+</tr>
+{% endfor %} 
